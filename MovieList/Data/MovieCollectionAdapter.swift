@@ -1,7 +1,6 @@
 import Foundation
 
 class MovieCollectionAdapter: MovieRepositoryProtocol {
-
     private let collection: MovieCollection
 
     init(collection: MovieCollection) {
@@ -18,5 +17,11 @@ class MovieCollectionAdapter: MovieRepositoryProtocol {
 
     func markAsWatched(title: String) {
         collection.markMovieAsWatched(title: title)
+    }
+
+    func updateMovie(id: UUID, movie: Movie) {
+        if let index = collection.movies.firstIndex(where: { $0.id == id }) {
+            collection.movies[index] = movie
+        }
     }
 }

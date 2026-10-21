@@ -1,7 +1,6 @@
 import Foundation
 
 class MockMovieRepository: MovieRepositoryProtocol {
-
     private var movies: [Movie]
 
     init(movies: [Movie] = []) {
@@ -19,6 +18,12 @@ class MockMovieRepository: MovieRepositoryProtocol {
     func markAsWatched(title: String) {
         if let index = movies.firstIndex(where: { $0.title == title }) {
             movies[index].markAsWatched()
+        }
+    }
+
+    func updateMovie(id: UUID, movie: Movie) {
+        if let index = movies.firstIndex(where: { $0.id == id }) {
+            movies[index] = movie
         }
     }
 }

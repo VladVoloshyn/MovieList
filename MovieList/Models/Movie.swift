@@ -1,6 +1,6 @@
 import Foundation
 
-enum MovieGenre: String {
+enum MovieGenre: String, CaseIterable {
     case action = "Бойовик"
     case comedy = "Комедія"
     case drama = "Драма"
@@ -23,18 +23,20 @@ struct Movie: Watchable {
     var note: String?
 
     init(
+        id: UUID = UUID(),
         title: String,
         year: Int,
         genre: MovieGenre,
         rating: Double,
+        isWatched: Bool = false,
         note: String? = nil
     ) {
-        self.id = UUID()
+        self.id = id
         self.title = title
         self.year = year
         self.genre = genre
         self.rating = rating
-        self.isWatched = false
+        self.isWatched = isWatched
         self.note = note
     }
 

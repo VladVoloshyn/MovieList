@@ -6,8 +6,13 @@
 	objectVersion = 90;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		28DF19DB3088F0A20018C045 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF19D73088EEDB0018C045 /* AppRouter.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DF19D73088EEDB0018C045 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -30,6 +35,7 @@
 		000000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
+				28DF19D53088EEB20018C045 /* Navigation */,
 				000000000000000000000010 /* MovieList */,
 				000000000000000000000020 /* Products */,
 			);
@@ -41,6 +47,14 @@
 				000000000000000000000120 /* MovieList.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		28DF19D53088EEB20018C045 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				28DF19D73088EEDB0018C045 /* AppRouter.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +124,7 @@
 		000000000000000120000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				28DF19DB3088F0A20018C045 /* AppRouter.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */

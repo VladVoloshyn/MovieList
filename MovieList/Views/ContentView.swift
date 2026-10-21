@@ -1,43 +1,13 @@
 import SwiftUI
+import Observation
 
 struct ContentView: View {
-
-    private let viewModel: MovieListViewModel
+    @State private var router = AppRouter()
+    @State private var viewModel: MovieListViewModel
 
     init() {
         let collection = MovieCollection(name: "Мої фільми")
         let adapter = MovieCollectionAdapter(collection: collection)
-
-        self.viewModel = MovieListViewModel(
-            repository: adapter,
-            sortingStrategy: SortByTitleStrategy()
-        )
-    }
-
-    var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "film")
-                .font(.system(size: 50))
-
-            Text("MovieList")
-                .font(.largeTitle)
-                .bold()
-
-            Text("MVVM + Builder + Adapter + Strategy")
-                .multilineTextAlignment(.center)
-
-            Text("Результат роботи дивіться в консолі Xcode")
-                .multilineTextAlignment(.center)
-        }
-        .padding()
-        .onAppear {
-            runScenario()
-        }
-    }
-
-    private func runScenario() {
-
-        print("\n=== Практична робота 2 ===")
 
         let movie1 = MovieBuilder()
             .setTitle("Interstellar")
@@ -61,30 +31,50 @@ struct ContentView: View {
             .setRating(7.9)
             .build()
 
-        viewModel.addMovie(movie1)
-        viewModel.addMovie(movie2)
-        viewModel.addMovie(movie3)
+        adapter.addMovie(movie1)
+        adapter.addMovie(movie2)
+        adapter.addMovie(movie3)
 
-        print("\nСортування за назвою:")
-
-        for movie in viewModel.getMovies() {
-            print("\(movie.title) — \(movie.rating)")
-        }
-
-        viewModel.changeSortingStrategy(
-            SortByRatingStrategy()
+        _viewModel = State(
+            initialValue: MovieListViewModel(
+                repository: adapter,
+                sortingStrategy: SortByTitleStrategy()
+            )
         )
+    }
 
-        print("\nСортування за рейтингом:")
-
-        for movie in viewModel.getMovies() {
-            print("\(movie.title) — \(movie.rating)")
+    var body: some View {
+        NavigationStack(path: $router.path) {
+            MovieListView(
+                viewModel: viewModel,
+                router: router
+            )
+            .navigationDestination(for: AppRoute.self) { route in
+                switch route {
+                case .movieDetails(let id):
+                    MovieDetailView(
+                        viewModel: viewModel,
+                        router: router,
+                        movieID: id
+                    )
+                }
+            }
         }
+        .sheet(item: $router.presentedSheet) { sheet in
+            switch sheet {
+            case .addMovie:
+                AddMovieView(
+                    viewModel: viewModel,
+                    router: router
+                )
 
-        viewModel.markAsWatched(
-            title: "Interstellar"
-        )
-
-        print("\nInterstellar позначено як переглянутий.")
+            case .editMovie(let id):
+                EditMovieView(
+                    viewModel: viewModel,
+                    router: router,
+                    movieID: id
+                )
+            }
+        }
     }
 }
