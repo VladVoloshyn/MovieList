@@ -15,9 +15,9 @@ class MockMovieRepository: MovieRepositoryProtocol {
         movies.append(movie)
     }
 
-    func markAsWatched(title: String) {
-        if let index = movies.firstIndex(where: { $0.title == title }) {
-            movies[index].markAsWatched()
+    func toggleWatched(id: UUID) {
+        if let index = movies.firstIndex(where: { $0.id == id }) {
+            movies[index].isWatched.toggle()
         }
     }
 

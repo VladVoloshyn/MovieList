@@ -37,21 +37,20 @@ struct MovieListView: View {
         }
         .navigationTitle("MovieList")
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
                     router.showOnlineSearch()
                 } label: {
                     Image(systemName: "magnifyingglass")
                 }
                 .accessibilityLabel("Пошук онлайн")
-            }
 
-            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     router.showAddMovie()
                 } label: {
                     Image(systemName: "plus")
                 }
+                .accessibilityLabel("Додати фільм")
             }
         }
     }

@@ -15,8 +15,10 @@ class MovieCollectionAdapter: MovieRepositoryProtocol {
         collection.addMovie(movie)
     }
 
-    func markAsWatched(title: String) {
-        collection.markMovieAsWatched(title: title)
+    func toggleWatched(id: UUID) {
+        if let index = collection.movies.firstIndex(where: { $0.id == id }) {
+            collection.movies[index].isWatched.toggle()
+        }
     }
 
     func updateMovie(id: UUID, movie: Movie) {

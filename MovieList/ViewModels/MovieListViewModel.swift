@@ -30,8 +30,8 @@ class MovieListViewModel {
         return movies
     }
 
-    func markAsWatched(title: String) {
-        repository.markAsWatched(title: title)
+    func toggleWatched(id: UUID) {
+        repository.toggleWatched(id: id)
         loadMovies()
     }
 

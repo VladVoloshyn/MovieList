@@ -29,7 +29,7 @@ struct MovieDetailView: View {
 
                         Button {
                             withAnimation(.spring()) {
-                                viewModel.markAsWatched(title: movie.title)
+                                viewModel.toggleWatched(id: movie.id)
                             }
                         } label: {
                             HStack {
