@@ -51,17 +51,34 @@ struct ContentView: View {
             )
             .navigationDestination(for: AppRoute.self) { route in
                 switch route {
+
                 case .movieDetails(let id):
                     MovieDetailView(
                         viewModel: viewModel,
                         router: router,
                         movieID: id
                     )
+
+                case .onlineSearch:
+                    let apiService = MovieAPIService()
+
+                    let networkRepository = MovieNetworkRepository(
+                        apiService: apiService
+                    )
+
+                    let networkViewModel = NetworkMovieViewModel(
+                        repository: networkRepository
+                    )
+
+                    NetworkMovieSearchView(
+                        viewModel: networkViewModel
+                    )
                 }
             }
         }
         .sheet(item: $router.presentedSheet) { sheet in
             switch sheet {
+
             case .addMovie:
                 AddMovieView(
                     viewModel: viewModel,

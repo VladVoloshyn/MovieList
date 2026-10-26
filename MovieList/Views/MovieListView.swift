@@ -23,8 +23,11 @@ struct MovieListView: View {
                         Spacer()
 
                         if movie.isWatched {
-                            Label("Переглянуто", systemImage: "checkmark.circle.fill")
-                                .font(.caption)
+                            Label(
+                                "Переглянуто",
+                                systemImage: "checkmark.circle.fill"
+                            )
+                            .font(.caption)
                         }
                     }
                 }
@@ -34,6 +37,15 @@ struct MovieListView: View {
         }
         .navigationTitle("MovieList")
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    router.showOnlineSearch()
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                }
+                .accessibilityLabel("Пошук онлайн")
+            }
+
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     router.showAddMovie()

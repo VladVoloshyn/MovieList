@@ -1,8 +1,10 @@
 import Foundation
 import SwiftUI
+import Observation
 
 enum AppRoute: Hashable {
     case movieDetails(UUID)
+    case onlineSearch
 }
 
 enum AppSheet: Identifiable {
@@ -13,6 +15,7 @@ enum AppSheet: Identifiable {
         switch self {
         case .addMovie:
             return "addMovie"
+
         case .editMovie(let id):
             return "editMovie-\(id)"
         }
@@ -26,6 +29,10 @@ class AppRouter {
 
     func showMovieDetails(id: UUID) {
         path.append(AppRoute.movieDetails(id))
+    }
+
+    func showOnlineSearch() {
+        path.append(AppRoute.onlineSearch)
     }
 
     func showAddMovie() {
